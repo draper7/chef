@@ -50,5 +50,5 @@ cron "cgsnapshot" do
   hour "7"
   minute "0"
   command "cgsnapshot -w /etc/cgsnapshot_whitelist.conf -t -f /etc/cgconfig.conf"
-  only_if { File.exist?("/etc/cgsnapshot_whitelist.conf" && File.exist?("/etc/cgsnapshot_blacklist.conf")
+  only_if { File.exist?("/etc/cgsnapshot_whitelist.conf" && File.exist?("/etc/cgsnapshot_blacklist.conf") }
 end
