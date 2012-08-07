@@ -46,9 +46,10 @@ template "/etc/cgconfig.conf" do
   notifies :restart, "service[cgconfig]", :immediately
 end
 
-cron "cgsnapshot" do
-  hour "7"
-  minute "0"
-  command "cgsnapshot -w /etc/cgsnapshot_whitelist.conf -t -f /etc/cgconfig.conf"
-  only_if { File.exist?("/etc/cgsnapshot_whitelist.conf" && File.exist?("/etc/cgsnapshot_blacklist.conf") }
+template "/etc/cron.daily/cgsnapshot" do
+  source "cgsnapshot.erb"
+  mode "0755"
+  owner "root"
+  group "root"
+  action :create
 end
